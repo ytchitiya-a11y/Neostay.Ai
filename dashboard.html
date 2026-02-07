@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | ChatWidgetPro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 font-roboto">
+
+<!-- NAVBAR -->
+<header class="bg-white shadow sticky top-0 z-50">
+  <div class="container mx-auto flex justify-between items-center p-4">
+    <span class="text-2xl font-bold text-indigo-600">ChatWidgetPro</span>
+    <button id="logoutBtn"
+      class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+      Logout
+    </button>
+  </div>
+</header>
+
+<!-- MAIN CONTAINER -->
+<section class="container mx-auto py-6 px-4">
+
+<!-- HEADER -->
+<div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-lg mb-6">
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold">Dashboard Overview</h1>
+      <p class="text-sm opacity-90">Business, AI & Leads at one place</p>
+    </div>
+    <span class="px-4 py-2 rounded-full bg-green-500 font-semibold">
+      ACTIVE
+    </span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="flex flex-wrap gap-3 mb-6">
+  <button onclick="showSlide(0)" class="tab-btn">Overview</button>
+  <button onclick="showSlide(1)" class="tab-btn">Leads</button>
+  <button onclick="showSlide(2)" class="tab-btn">Follow-Ups</button>
+  <button onclick="showSlide(3)" class="tab-btn">Business Info</button>
+  <button onclick="showSlide(4)" class="tab-btn">Plans & Billing</button>
+</div>
+
+<style>
+.tab-btn{
+  padding:10px 18px;
+  background:#eef2ff;
+  border-radius:10px;
+  font-weight:600;
+}
+.stat{
+  background:white;
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  text-align:center;
+}
+</style>
+
+<!-- ================= SLIDES ================= -->
+
+<!-- OVERVIEW -->
+<div class="slide">
+
+  <!-- STATS -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="stat">Total Leads<br><b>120</b></div>
+    <div class="stat">New Today<br><b>12</b></div>
+    <div class="stat">Pending Follow-ups<br><b>8</b></div>
+    <div class="stat">Converted<br><b>45</b></div>
+  </div>
+
+  <!-- USER INFO -->
+  <div class="bg-white p-6 rounded shadow mb-6">
+    <p><b>Email:</b> <span id="userEmail"></span></p>
+    <p><b>Plan:</b> Starter</p>
+  </div>
+
+  <!-- API KEY -->
+  <div class="bg-white p-6 rounded shadow mb-6">
+    <h3 class="font-bold mb-2">API Key</h3>
+    <div class="flex gap-3">
+      <input id="apiKey" readonly class="w-full p-3 border rounded bg-gray-100">
+      <button onclick="generateKey()"
+        class="bg-indigo-600 text-white px-4 rounded">Generate</button>
+    </div>
+  </div>
+
+  <!-- WIDGET -->
+  <div class="bg-white p-6 rounded shadow">
+    <h3 class="font-bold mb-2">Widget Code</h3>
+    <textarea id="widgetCode" rows="3"
+      class="w-full p-3 border rounded bg-gray-100"></textarea>
+    <button onclick="copyCode()"
+      class="mt-3 bg-green-600 text-white px-5 py-2 rounded">
+      Copy Code
+    </button>
+  </div>
+
+</div>
+
+<!-- LEADS -->
+<div class="slide hidden">
+  <h2 class="text-xl font-bold mb-4">Leads</h2>
+  <p>Lead list table yahan aayegi</p>
+</div>
+
+<!-- FOLLOW UPS -->
+<div class="slide hidden">
+  <h2 class="text-xl font-bold mb-4">Follow-Ups</h2>
+  <p>Today / Upcoming / Missed follow-ups</p>
+</div>
+
+<!-- BUSINESS INFO -->
+<div class="slide hidden">
+  <h2 class="text-xl font-bold mb-4">Business Information</h2>
+  <textarea class="w-full p-3 border rounded mb-3"
+    placeholder="Products / Services"></textarea>
+  <textarea class="w-full p-3 border rounded mb-3"
+    placeholder="Pricing / Offers"></textarea>
+  <textarea class="w-full p-3 border rounded"
+    placeholder="Policies & Working Hours"></textarea>
+</div>
+
+<!-- BILLING -->
+<div class="slide hidden">
+  <h2 class="text-xl font-bold mb-4">Plans & Billing</h2>
+  <div class="stat mb-3">Plan: Starter</div>
+  <div class="stat mb-3">Expiry: 25 Mar 2026</div>
+  <button class="bg-indigo-600 text-white px-5 py-2 rounded">
+    Upgrade Plan
+  </button>
+</div>
+
+</section>
+
+<!-- ================= FIREBASE LOGIC ================= -->
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut }
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, user => {
+  if(!user) location.href="login.html";
+  document.getElementById("userEmail").innerText = user.email;
+});
+
+document.getElementById("logoutBtn").onclick = () => {
+  signOut(auth).then(()=>location.href="login.html");
+};
+</script>
+
+<!-- UTIL JS -->
+<script>
+const slides = document.querySelectorAll(".slide");
+function showSlide(i){
+  slides.forEach((s,idx)=>s.classList.toggle("hidden", idx!==i));
+}
+showSlide(0);
+
+function generateKey(){
+  const key="api_"+Math.random().toString(36).substring(2,16);
+  apiKey.value=key;
+  widgetCode.value=`<script src="https://yourdomain.com/widget.js" data-key="${key}"></script>`;
+}
+function copyCode(){
+  navigator.clipboard.writeText(widgetCode.value);
+  alert("Copied ✅");
+}
+</script>
+
+</body>
+</html>
