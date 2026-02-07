@@ -131,6 +131,83 @@
     <button class="bg-gray-700 text-white px-4 py-2 rounded">Invoice</button>
   </div>
 </div>
+<!-- BUSINESS INFORMATION SLIDE -->
+<div class="slide hidden">
+
+  <h2 class="text-2xl font-bold mb-6">Business Information</h2>
+
+  <!-- BASIC INFO -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6">
+    <h3 class="font-semibold mb-4">Basic Business Details</h3>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      <input class="p-3 border rounded" placeholder="Business Name" />
+      <input class="p-3 border rounded" placeholder="Working Hours (10AM - 8PM)" />
+      <input class="p-3 border rounded" placeholder="City" />
+      <input class="p-3 border rounded" placeholder="Contact Number" />
+    </div>
+  </div>
+
+  <!-- PRODUCTS / SERVICES -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6">
+    <h3 class="font-semibold mb-4">Products / Services</h3>
+
+    <textarea class="w-full p-3 border rounded" rows="3"
+      placeholder="List your products or services with short explanation"></textarea>
+  </div>
+
+  <!-- PRICING & PACKAGES -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6">
+    <h3 class="font-semibold mb-4">Pricing / Packages</h3>
+
+    <textarea class="w-full p-3 border rounded" rows="3"
+      placeholder="Prices, packages, discounts, EMI options"></textarea>
+  </div>
+
+  <!-- OFFERS -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6">
+    <h3 class="font-semibold mb-4">Offers & Promotions</h3>
+
+    <textarea class="w-full p-3 border rounded" rows="2"
+      placeholder="Current offers, coupons, festival discounts"></textarea>
+  </div>
+
+  <!-- PAYMENT METHODS -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6">
+    <h3 class="font-semibold mb-4">Payment Methods</h3>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <label><input type="checkbox"> UPI</label>
+      <label><input type="checkbox"> Cash</label>
+      <label><input type="checkbox"> Card</label>
+      <label><input type="checkbox"> Net Banking</label>
+      <label><input type="checkbox"> EMI</label>
+    </div>
+  </div>
+
+  <!-- DELIVERY / SERVICE PROCESS -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6">
+    <h3 class="font-semibold mb-4">Delivery / Service Process</h3>
+
+    <textarea class="w-full p-3 border rounded" rows="3"
+      placeholder="How you deliver product or provide service step-by-step"></textarea>
+  </div>
+
+  <!-- RETURN / REFUND POLICY -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6">
+    <h3 class="font-semibold mb-4">Return / Refund Policy</h3>
+
+    <textarea class="w-full p-3 border rounded" rows="3"
+      placeholder="Return rules, refund time, conditions"></textarea>
+  </div>
+
+  <!-- SAVE BUTTON -->
+  <button
+    class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
+    Save Business Information
+  </button>
+
+</div>
 
   <!-- USER INFO -->
   <div class="bg-white rounded-lg shadow p-6 mb-6">
