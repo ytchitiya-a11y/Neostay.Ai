@@ -117,9 +117,7 @@
     <button class="bg-red-600 text-white px-4 py-2 rounded">Missed 🚨</button>
   </div>
 </div>
-
-
-   
+ 
 <div class="slide hidden">
   <h2 class="text-xl font-bold mb-4">Subscription & Billing</h2>
 
