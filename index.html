@@ -124,12 +124,9 @@
 
 <!-- ================= SCRIPT ================= -->
 <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
    apiKey: "AIzaSyBsAEpp3hooCCHYEdmTNqTId9aWK0a69Ms",
@@ -153,44 +150,20 @@ function getPlanDuration(planType) {
 }
 
 /* ================= LOGIN ================= */
-/* ================= LOGIN ================= */
-
 window.login = async function() {
   try {
     const emailValue = document.getElementById("email").value;
     const passwordValue = document.getElementById("password").value;
 
     const userCredential = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
-
     console.log("Logged in:", userCredential.user.email);
-    document.getElementById("loginError").classList.add("hidden"); // hide error if successful
-
+    document.getElementById("loginError").classList.add("hidden");
   } catch (error) {
     console.error("Login Error:", error);
-    alert(error.message); // shows why login failed
+    alert(error.message);
     document.getElementById("loginError").classList.remove("hidden");
   }
 };
-
-window.logout = async function() {
-  try {
-    await signOut(auth);
-    console.log("Logged out");
-  } catch (error) {
-    console.error("Logout Error:", error);
-  }
-};
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    document.getElementById("loginSection").classList.add("hidden");
-    document.getElementById("adminPanel").classList.remove("hidden");
-    loadClients();
-  } else {
-    document.getElementById("loginSection").classList.remove("hidden");
-    document.getElementById("adminPanel").classList.add("hidden");
-  }
-});
 
 
 /* ================= ADD CLIENT ================= */
