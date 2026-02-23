@@ -153,29 +153,45 @@ function getPlanDuration(planType) {
 }
 
 /* ================= LOGIN ================= */
+/* ================= LOGIN ================= */
 
 window.login = async function() {
   try {
-    await signInWithEmailAndPassword(auth, email.value, password.value);
-  } catch {
-    loginError.classList.remove("hidden");
+    const emailValue = document.getElementById("email").value;
+    const passwordValue = document.getElementById("password").value;
+
+    const userCredential = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
+
+    console.log("Logged in:", userCredential.user.email);
+    document.getElementById("loginError").classList.add("hidden"); // hide error if successful
+
+  } catch (error) {
+    console.error("Login Error:", error);
+    alert(error.message); // shows why login failed
+    document.getElementById("loginError").classList.remove("hidden");
   }
 };
 
 window.logout = async function() {
-  await signOut(auth);
+  try {
+    await signOut(auth);
+    console.log("Logged out");
+  } catch (error) {
+    console.error("Logout Error:", error);
+  }
 };
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    loginSection.classList.add("hidden");
-    adminPanel.classList.remove("hidden");
+    document.getElementById("loginSection").classList.add("hidden");
+    document.getElementById("adminPanel").classList.remove("hidden");
     loadClients();
   } else {
-    loginSection.classList.remove("hidden");
-    adminPanel.classList.add("hidden");
+    document.getElementById("loginSection").classList.remove("hidden");
+    document.getElementById("adminPanel").classList.add("hidden");
   }
 });
+
 
 /* ================= ADD CLIENT ================= */
 
